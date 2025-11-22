@@ -1,0 +1,57 @@
+{
+  "criteria": {
+    "pe_ratio": {
+      "enabled": true,
+      "min": 0,
+      "max": 15,
+      "description": "市盈率 (Price-to-Earnings Ratio)"
+    },
+    "pb_ratio": {
+      "enabled": true,
+      "min": 0,
+      "max": 3,
+      "description": "市净率 (Price-to-Book Ratio)"
+    },
+    "roe": {
+      "enabled": true,
+      "min": 15,
+      "max": 100,
+      "description": "净资产收益率 (Return on Equity) %"
+    },
+    "debt_to_equity": {
+      "enabled": true,
+      "min": 0,
+      "max": 0.5,
+      "description": "资产负债比 (Debt-to-Equity Ratio)"
+    },
+    "current_ratio": {
+      "enabled": true,
+      "min": 1.5,
+      "max": 10,
+      "description": "流动比率 (Current Ratio)"
+    },
+    "dividend_yield": {
+      "enabled": false,
+      "min": 2,
+      "max": 100,
+      "description": "股息收益率 (Dividend Yield) %"
+    },
+    "market_cap_min": {
+      "enabled": true,
+      "value": 1000000000,
+      "description": "最小市值 (Minimum Market Cap in USD)"
+    },
+    "revenue_growth": {
+      "enabled": false,
+      "min": 5,
+      "max": 100,
+      "description": "营收增长率 (Revenue Growth) %"
+    }
+  },
+  "markets": {
+    "us": true,
+    "hk": true,
+    "cn": true
+  },
+  "last_updated": "2025-11-22"
+}
