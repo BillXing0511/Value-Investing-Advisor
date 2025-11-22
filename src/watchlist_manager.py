@@ -158,7 +158,7 @@ class WatchListManager:
 
         return True
 
-    def update_all_stocks(self, delay: float = 0.5) -> Dict[str, int]:
+    def update_all_stocks(self, delay: float = 2.0) -> Dict[str, int]:
         """
         更新所有股票的数据
 

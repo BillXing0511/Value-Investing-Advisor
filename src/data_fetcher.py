@@ -118,7 +118,7 @@ class DataFetcher:
     def get_multiple_stocks(
         self,
         symbols: List[str],
-        delay: float = 0.5
+        delay: float = 2.0
     ) -> List[Dict[str, Any]]:
         """
         批量获取多个股票的信息
