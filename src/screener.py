@@ -3,6 +3,7 @@
 """
 from typing import Dict, List, Any, Optional
 import logging
+import time
 from .data_fetcher import DataFetcher
 from .config_manager import ConfigManager
 
@@ -83,7 +84,8 @@ class StockScreener:
     def screen_stocks(
         self,
         symbols: List[str],
-        verbose: bool = True
+        verbose: bool = True,
+        delay_between_requests: float = 5.0
     ) -> Dict[str, List[Dict[str, Any]]]:
         """
         筛选股票列表
@@ -91,6 +93,7 @@ class StockScreener:
         Args:
             symbols: 股票代码列表
             verbose: 是否显示详细信息
+            delay_between_requests: 每次请求之间的延迟（秒）
 
         Returns:
             {'passed': [...], 'failed': [...]}
@@ -119,6 +122,9 @@ class StockScreener:
                     'symbol': symbol,
                     'reason': '无法获取数据'
                 })
+                # 即使失败也要添加延迟，避免连续请求
+                if i < len(symbols):
+                    time.sleep(delay_between_requests)
                 continue
 
             # 应用筛选标准
@@ -135,6 +141,12 @@ class StockScreener:
                 failed.append(stock_data)
                 if verbose:
                     logger.info(f"  ✗ {symbol} 未通过: {'; '.join(reasons[:2])}")
+
+            # 添加延迟避免API限制（除了最后一个请求）
+            if i < len(symbols):
+                if verbose:
+                    logger.info(f"  等待 {delay_between_requests} 秒后继续...")
+                time.sleep(delay_between_requests)
 
         if verbose:
             logger.info(f"\n筛选完成: {len(passed)} 通过, {len(failed)} 未通过")
