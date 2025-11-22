@@ -85,7 +85,7 @@ class StockScreener:
         self,
         symbols: List[str],
         verbose: bool = True,
-        delay_between_requests: float = 5.0
+        delay_between_requests: float = 15.0
     ) -> Dict[str, List[Dict[str, Any]]]:
         """
         筛选股票列表

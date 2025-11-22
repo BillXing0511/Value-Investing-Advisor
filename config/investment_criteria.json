@@ -53,5 +53,25 @@
     "hk": true,
     "cn": true
   },
+  "data_sources": {
+    "enabled": true,
+    "primary": "financial_modeling_prep",
+    "fallback_enabled": true,
+    "sources": [
+      {
+        "name": "financial_modeling_prep",
+        "enabled": true,
+        "api_key": "demo",
+        "description": "Financial Modeling Prep (免费版250次/天)"
+      },
+      {
+        "name": "yahoo_finance",
+        "enabled": true,
+        "description": "Yahoo Finance (有速率限制风险)"
+      }
+    ],
+    "request_delay": 15.0,
+    "retry_count": 3
+  },
   "last_updated": "2025-11-22"
 }

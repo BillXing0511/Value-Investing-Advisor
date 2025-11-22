@@ -53,6 +53,12 @@ class DataFetcher:
         """
         for attempt in range(retry):
             try:
+                # 在每次尝试前添加短暂延迟，避免过快请求
+                if attempt > 0:
+                    wait_time = 10 * (2 ** (attempt - 1))  # 10秒, 20秒
+                    logger.info(f"等待 {wait_time} 秒后重试 {symbol}...")
+                    time.sleep(wait_time)
+
                 stock = yf.Ticker(symbol)
                 info = stock.info
 
@@ -109,11 +115,6 @@ class DataFetcher:
             except Exception as e:
                 error_msg = str(e)
                 logger.warning(f"获取 {symbol} 数据失败 (尝试 {attempt + 1}/{retry}): {error_msg}")
-                if attempt < retry - 1:
-                    # 使用指数退避策略：5秒, 10秒, 20秒...
-                    wait_time = 5 * (2 ** attempt)
-                    logger.info(f"等待 {wait_time} 秒后重试...")
-                    time.sleep(wait_time)
                 continue
 
         logger.error(f"无法获取 {symbol} 的数据")
