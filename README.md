@@ -32,7 +32,14 @@
 - 每天自动更新Watch List中股票的最新数据
 - 可自定义调度时间
 
-### 5. 命令行界面
+### 5. Web 界面 (新功能!)
+- 🌐 基于 Streamlit 的现代化 Web 界面
+- 📊 数据可视化（图表、饼图、K线图）
+- 🎨 美观的用户界面
+- 📱 响应式设计，支持移动端
+- 🚀 一键部署到云端
+
+### 6. 命令行界面
 - 直观的CLI命令
 - 交互式配置向导
 - 表格化显示结果
@@ -42,9 +49,11 @@
 ```
 Value-Investing-Advisor/
 ├── README.md                   # 项目文档
+├── DEPLOYMENT.md              # 部署指南
 ├── requirements.txt            # Python依赖
 ├── setup.py                   # 安装配置
-├── main.py                    # 主程序入口
+├── main.py                    # CLI 主程序入口
+├── app.py                     # Web 应用入口 (NEW!)
 ├── config/
 │   └── investment_criteria.json  # 投资标准配置
 ├── src/
@@ -55,6 +64,16 @@ Value-Investing-Advisor/
 │   ├── watchlist_manager.py   # Watch List管理
 │   ├── scheduler.py           # 任务调度
 │   └── cli.py                 # 命令行界面
+├── web/                       # Web 应用 (NEW!)
+│   └── pages/                 # Web 页面模块
+│       ├── home.py            # 首页
+│       ├── config.py          # 配置管理页面
+│       ├── screening.py       # 股票筛选页面
+│       ├── watchlist.py       # Watch List 页面
+│       ├── stock_info.py      # 股票详情页面
+│       └── scheduler.py       # 定时任务页面
+├── .streamlit/                # Streamlit 配置
+│   └── config.toml
 ├── data/
 │   ├── watchlist.json         # Watch List数据
 │   └── stock_data/            # 股票数据缓存
@@ -95,7 +114,27 @@ pip install -e .
 
 ## 快速开始
 
-### 方式一：交互式向导（推荐新手）
+### 🌐 方式一：Web 界面（推荐！）
+
+启动 Web 应用，通过浏览器使用：
+
+```bash
+# 安装依赖
+pip install -r requirements.txt
+
+# 启动 Web 应用
+streamlit run app.py
+
+# 在浏览器中打开 http://localhost:8501
+```
+
+**Web 界面特点：**
+- ✨ 现代化的用户界面
+- 📊 数据可视化图表
+- 🖱️ 点击操作，无需命令
+- 📱 支持移动设备访问
+
+### 方式二：交互式向导（CLI）
 
 运行交互式配置向导，系统会引导您完成配置并执行第一次筛选：
 
@@ -103,7 +142,7 @@ pip install -e .
 python main.py interactive
 ```
 
-### 方式二：命令行使用
+### 方式三：命令行使用
 
 #### 1. 查看当前配置
 ```bash
@@ -317,20 +356,23 @@ A: 是的，yfinance支持全球多个市场。您需要：
 
 ## 开发计划
 
-- [ ] Web界面支持
+- [x] Web界面支持 ✅ 已完成！
+- [x] 数据可视化 ✅ 已完成！
+- [ ] 用户认证系统
 - [ ] 技术分析指标集成
 - [ ] 更多数据源支持
 - [ ] 回测功能
 - [ ] 投资组合管理
 - [ ] 邮件/微信通知
 - [ ] 数据库支持（替代JSON）
-- [ ] Docker部署
 
 ## 技术栈
 
 - **Python 3.8+**
 - **yfinance** - 股票数据获取
 - **pandas** - 数据处理
+- **Streamlit** - Web 界面框架 (NEW!)
+- **Plotly** - 数据可视化 (NEW!)
 - **APScheduler** - 任务调度
 - **click** - CLI框架
 - **tabulate** - 表格显示
