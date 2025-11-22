@@ -40,7 +40,7 @@ class DataFetcher:
         """初始化数据获取器"""
         self.cache = {}
 
-    def get_stock_info(self, symbol: str, retry: int = 3) -> Optional[Dict[str, Any]]:
+    def get_stock_info(self, symbol: str, retry: int = 2) -> Optional[Dict[str, Any]]:
         """
         获取单个股票的详细信息
 
@@ -109,7 +109,10 @@ class DataFetcher:
             except Exception as e:
                 logger.warning(f"获取 {symbol} 数据失败 (尝试 {attempt + 1}/{retry}): {str(e)}")
                 if attempt < retry - 1:
-                    time.sleep(1)
+                    # 使用指数退避策略：3秒, 6秒, 12秒...
+                    wait_time = 3 * (2 ** attempt)
+                    logger.info(f"等待 {wait_time} 秒后重试...")
+                    time.sleep(wait_time)
                 continue
 
         logger.error(f"无法获取 {symbol} 的数据")
@@ -118,7 +121,7 @@ class DataFetcher:
     def get_multiple_stocks(
         self,
         symbols: List[str],
-        delay: float = 2.0
+        delay: float = 3.0
     ) -> List[Dict[str, Any]]:
         """
         批量获取多个股票的信息
