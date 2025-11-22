@@ -15,7 +15,7 @@ def show():
     # 检查是否有启用的标准
     enabled_criteria = config_mgr.get_enabled_criteria()
     if not enabled_criteria:
-        st.warning("⚠️ 没有启用任何筛选标准。请前往"配置管理"启用筛选标准。")
+        st.warning("⚠️ 没有启用任何筛选标准。请前往「配置管理」启用筛选标准。")
         if st.button("前往配置管理"):
             st.switch_page("pages/config.py")
         return
