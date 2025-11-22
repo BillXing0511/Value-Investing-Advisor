@@ -116,7 +116,7 @@ def show():
         if len(watchlist) > 5:
             st.caption(f"还有 {len(watchlist) - 5} 只股票... 前往 Watch List 查看全部")
     else:
-        st.info("Watch List 为空。前往"股票筛选"开始筛选股票。")
+        st.info("Watch List 为空。前往「股票筛选」开始筛选股票。")
 
     st.markdown("---")
 
